@@ -1,14 +1,15 @@
+
 import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-gray-200 mt-10 ">
-      <div className="max-w-7xl mx-auto px-4 py-8 flex justify-between items-center">
-        <p className="text-gray-500">
+    <footer className="mt-10 border-t border-gray-200">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-center sm:flex-row sm:py-8 sm:text-left">
+        <p className="text-sm text-gray-500">
           © 2026 BanglaBulletin
         </p>
 
-        <p className="text-gray-500">
+        <p className="text-sm text-gray-500">
           Source: BBC Bangla
         </p>
       </div>
@@ -17,3 +18,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

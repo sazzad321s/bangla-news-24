@@ -1,60 +1,99 @@
 "use client";
-import { authClient } from '@/lib/auth-client';
-import { redirect } from 'next/navigation';
-import React from 'react';
 
+import React from "react";
+import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
+const router = useRouter();
 
-   const onSubmit = async(e: React.SubmitEvent<HTMLElement>) => {
-     e.preventDefault();
-     const formData = new FormData(e.target);
-     const userData = Object.fromEntries(formData.entries()) as {
-    name: string,
-    email: string,
-    image: string,
-    password: string
-} ; 
-
-     const {data,error} = await authClient.signUp.email({
-        ...userData,
-        callbackURL: '/',
-     });
-
-     if(data){
-        console.log(data);
-        redirect('/');
-     }
-     if(error){
-        console.log(error);
-     }
-   }
+const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+e.preventDefault();
 
 
-    return (
-        <div className='flex flex-col items-center justify-center mt-5'>
-            <h2 className='text-2xl font-bold text-red-700'>সাইন আপ</h2>
-            <form onSubmit={onSubmit}>
-                <fieldset className="fieldset rounded-box w-md">
-                
+const formData = new FormData(e.currentTarget);
 
-                <label className="label text-lg">নাম</label>
-                <input type="text" name='name' className="input w-md" placeholder="নাম" />
+const userData = Object.fromEntries(formData.entries()) as {
+  name: string;
+  email: string;
+  image: string;
+  password: string;
+};
 
-                <label className="label text-lg">Image</label>
-                <input type="url" name="image" className="input w-md" placeholder="Image" />
+const { data, error } = await authClient.signUp.email({
+  ...userData,
+  callbackURL: "/",
+});
 
-                <label className="label text-lg">ইমেইল</label>
-                <input type="email" name="email" className="input w-md" placeholder="Email" />
+if (error) {
+  toast.error(error.message || "Sign up failed");
+  console.log(error);
+  return;
+}
 
-                <label className="label text-lg">পাসওয়ার্ড</label>
-                <input type="password" name="password" className="input w-md" placeholder="Password" />
+if (data) {
+  toast.success("Sign up successful!");
+  router.push("/");
+}
 
-                <button type='submit' className="btn text-white bg-red-700 mt-4 font-bold">সাইন আপ  করুন</button>
-                </fieldset>
-            </form>
-        </div>
-    );
+
+};
+
+return ( <div className="mx-auto mt-5 flex w-full max-w-md flex-col items-center justify-center px-4"> <h2 className="mb-3 text-2xl font-bold text-red-700">
+সাইন আপ </h2>
+
+
+  <form onSubmit={onSubmit} className="w-full">
+    <fieldset className="fieldset w-full rounded-box">
+      <label className="label text-lg">নাম</label>
+      <input
+        type="text"
+        name="name"
+        className="input w-full"
+        placeholder="নাম"
+        required
+      />
+
+      <label className="label text-lg">Image URL</label>
+      <input
+        type="url"
+        name="image"
+        className="input w-full"
+        placeholder="Image URL"
+      />
+
+      <label className="label text-lg">ইমেইল</label>
+      <input
+        type="email"
+        name="email"
+        className="input w-full"
+        placeholder="Email"
+        required
+      />
+
+      <label className="label text-lg">পাসওয়ার্ড</label>
+      <input
+        type="password"
+        name="password"
+        className="input w-full"
+        placeholder="Password"
+        required
+        minLength={8}
+      />
+
+      <button
+        type="submit"
+        className="btn mt-4 w-full bg-red-700 font-bold text-white hover:bg-red-800"
+      >
+        সাইন আপ করুন
+      </button>
+    </fieldset>
+  </form>
+</div>
+
+
+);
 };
 
 export default SignUpPage;

@@ -1,3 +1,4 @@
+
 import MainNews from "@/components/MainNews";
 import MostRead from "@/components/MostRead";
 import NewsCard from "@/components/NewsCard";
@@ -41,28 +42,28 @@ export default async function Home() {
   const filteredOtherSection = otherSection
     .map((os) => ({
       ...os,
-      articles: os.articles.filter((news) => news.type === "article"),
+      articles: os.articles.filter(
+        (news) => news.type === "article"
+      ),
     }))
     .filter((os) => os.articles.length > 0);
 
-  console.log(filteredOtherSection);
-
   return (
-    <div className="max-w-7xl mx-auto grid grid-cols-3 my-8 gap-3">
+    <div className="mx-auto my-5 grid max-w-7xl grid-cols-1 gap-5 px-3 sm:px-4 lg:my-8 lg:grid-cols-3 lg:gap-3">
       {/* News Section */}
-      <div className="col-span-2">
+      <div className="min-w-0 lg:col-span-2">
         {/* Main news */}
         <MainNews news={mainNews} />
 
         {/* Other news */}
-        <div className="grid gap-5 mt-5">
+        <div className="mt-5 grid gap-5">
           {filteredOtherSection.map((os) => (
             <div key={os.curationId}>
-              <h1 className="font-bold text-lg border-b-2 pb-1 border-red-700">
+              <h1 className="border-b-2 border-red-700 pb-1 text-lg font-bold">
                 {os.title}
               </h1>
 
-              <div className="grid grid-cols-3 mt-3 gap-2">
+              <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
                 {os.articles.map((news) => (
                   <NewsCard key={news.id} news={news} />
                 ))}
@@ -73,9 +74,10 @@ export default async function Home() {
       </div>
 
       {/* Most read section */}
-      <div className="col-span-1">
+      <div className="min-w-0 lg:col-span-1">
         <MostRead />
       </div>
     </div>
   );
 }
+

@@ -66,7 +66,7 @@ return ( <main className="mx-auto w-full max-w-4xl px-4 py-5 sm:px-6 sm:py-8">
   )}
 
   {/* News Text */}
-  <div className="break-words text-base leading-8 text-gray-800 sm:text-lg sm:leading-9">
+  <div className="wrap-break-word text-base leading-8 text-gray-800 sm:text-lg sm:leading-9">
     {news.text}
   </div>
 </main>
