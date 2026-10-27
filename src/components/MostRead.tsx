@@ -21,9 +21,9 @@ const MostRead = async () => {
 
   return (
     <div className="card min-w-0 border border-gray-300 bg-base-100 p-3 sm:p-5">
-      <h1 className="mb-3 text-xl font-bold text-red-700 sm:text-2xl">
+      <h2 className="mb-3 border-b-2 border-red-700 pb-1 text-lg font-bold text-red-700 sm:text-2xl">
         সর্বাধিক পঠিত
-      </h1>
+      </h2>
 
       <div className="grid gap-3">
         {news.map((n, i) => (
@@ -33,13 +33,13 @@ const MostRead = async () => {
             className="block"
           >
             <div className="flex min-w-0 items-start gap-2">
-              <p className="shrink-0 text-xl font-bold text-red-600 sm:text-2xl">
+              <p className="shrink-0 text-lg font-bold text-red-600 sm:text-2xl">
                 {i + 1}
               </p>
 
-              <h2 className="min-w-0 wrap-break-word font-bold">
+              <h3 className="min-w-0 text-sm font-bold wrap-break-word sm:text-base">
                 {n.title}
-              </h2>
+              </h3>
             </div>
           </Link>
         ))}

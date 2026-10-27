@@ -35,21 +35,21 @@ const NewsCard = ({ news }: { news: News }) => {
             src={news.imageUrl}
             alt={news.imageAlt}
             fill
-            sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+            sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, (max-width: 1279px) 50vw, 33vw"
             className="object-cover"
           />
         </figure>
 
         <div className="card-body gap-2 p-3 sm:p-4">
-          <p className="text-sm text-red-500">
+          <p className="text-xs text-red-500 sm:text-sm">
             {news.category}
           </p>
 
-          <h2 className="card-title text-base sm:text-lg">
+          <h2 className="card-title text-base wrap-break-word sm:text-lg">
             {news.title}
           </h2>
 
-          <p className="line-clamp-2 text-sm sm:text-base">
+          <p className="line-clamp-2 text-sm wrap-break-word sm:text-base">
             {news.description}
           </p>
 

@@ -3,13 +3,12 @@ import { Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Marquee from "@/components/Marquee";
+import Navlinks from "@/components/Navlinks";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 const notoSerifBengali = Noto_Serif_Bengali({
-  subsets: ["latin","bengali"],
+  subsets: ["latin", "bengali"],
 });
-
-
 
 export const metadata: Metadata = {
   title: "Bangla News 24",
@@ -20,16 +19,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      data-theme='light'
+      data-theme="light"
       className={`${notoSerifBengali.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-dvh flex-col">
         <Header />
-        <Marquee />
-        <main className="max-w-7xl mx-auto">{children}</main>
+
+        {/* Headlines + categories stay pinned together while scrolling */}
+        <div className="sticky top-0 z-50">
+          <Marquee />
+          <Navlinks />
+        </div>
+
+        <main className="mx-auto w-full max-w-7xl flex-1">{children}</main>
+
         <Footer />
         <Toaster />
-        </body>
+      </body>
     </html>
   );
 }

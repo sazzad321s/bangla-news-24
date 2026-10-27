@@ -49,21 +49,21 @@ export default async function Home() {
     .filter((os) => os.articles.length > 0);
 
   return (
-    <div className="mx-auto my-5 grid max-w-7xl grid-cols-1 gap-5 px-3 sm:px-4 lg:my-8 lg:grid-cols-3 lg:gap-3">
+    <div className="mx-auto my-4 grid w-full max-w-7xl grid-cols-1 gap-6 px-3 sm:px-4 lg:my-8 lg:grid-cols-3 lg:gap-6 xl:gap-8">
       {/* News Section */}
       <div className="min-w-0 lg:col-span-2">
         {/* Main news */}
         <MainNews news={mainNews} />
 
         {/* Other news */}
-        <div className="mt-5 grid gap-5">
+        <div className="mt-6 grid gap-6">
           {filteredOtherSection.map((os) => (
-            <div key={os.curationId}>
-              <h1 className="border-b-2 border-red-700 pb-1 text-lg font-bold">
+            <div key={os.curationId} className="min-w-0">
+              <h2 className="border-b-2 border-red-700 pb-1 text-lg font-bold wrap-break-word sm:text-xl">
                 {os.title}
-              </h1>
+              </h2>
 
-              <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+              <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-2 xl:grid-cols-3">
                 {os.articles.map((news) => (
                   <NewsCard key={news.id} news={news} />
                 ))}
